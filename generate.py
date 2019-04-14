@@ -44,7 +44,6 @@ cursorY = stepY
 for line in table:
     cursorX = 0
     for cell in line:
-        print (f"{cursorX:3}:{cursorY:3} -> cell")
         c.drawString(cursorX + marginX, cursorY, cell)
         cursorX += stepX
     cursorY += stepY
