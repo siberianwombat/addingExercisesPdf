@@ -36,7 +36,7 @@ for line in table:
     print ("", line)
 
 c = canvas.Canvas("samples.pdf", bottomup=0)
-c.setFont('Helvetica', 20)
+c.setFont('Helvetica', 30)
 stepY = int(a4HeightPoints / (nRows + 1))
 stepX = int(a4WidthPoints / nCols)
 marginX = 10
