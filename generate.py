@@ -11,12 +11,21 @@ def randomSubstraction():
     a = random.randint(3,19)
     b = 20 
     while b >= a:
-        b = random.randint(1,10)
+        b = random.randint(1,5)
     return f'{a:d} — {b:d} ='
+
+def randomAdditionSubstraction():
+    a = random.randint(2,10)
+    b = random.randint(2,10)
+    c = 20 
+    while c >= a:
+        c = random.randint(1,5)
+    return f'{a:d} + {b:d} — {c:d} ='
 
 examplesSwitcher = {
     1: randomAddition,
-    2: randomSubstraction
+    2: randomSubstraction,
+    3: randomAdditionSubstraction
 }
 
 table = []
@@ -36,7 +45,7 @@ for line in table:
     print ("", line)
 
 c = canvas.Canvas("samples.pdf", bottomup=0)
-c.setFont('Helvetica', 30)
+c.setFont('Helvetica', 20)
 stepY = int(a4HeightPoints / (nRows + 1))
 stepX = int(a4WidthPoints / nCols)
 marginX = 10
