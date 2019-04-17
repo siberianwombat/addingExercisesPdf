@@ -1,20 +1,19 @@
 import random
 from reportlab.pdfgen import canvas
 
-
 def randomAddition():
-    a = random.randint(1,10)
-    b = random.randint(1,10)
+    a = random.randint(1, 10)
+    b = random.randint(1, 10)
     return f'{a:d} + {b:d} ='
 
 def randomSubstraction():
-    a = random.randint(3,19)
+    a = random.randint(3, 19)
     b = random.randint(1, min(5, a-1))
     return f'{a:d} — {b:d} ='
 
 def randomAdditionSubstraction():
-    a = random.randint(2,10)
-    b = random.randint(2,10)
+    a = random.randint(2, 10)
+    b = random.randint(2, 10)
     c = random.randint(1, min(5, a + b))
     return f'{a:d} + {b:d} — {c:d} ='
 
