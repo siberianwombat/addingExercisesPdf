@@ -6,5 +6,5 @@ Generates 1st grader arithmetics exercises in .pdf form for using in Notability 
 ![pdf page sample](https://raw.githubusercontent.com/siberianwombat/addingExercisesPdf/master/RMscreen.png)
 
 ## requirements:
-* python3+
+* python3.6+
 * `pip3 install reportlab`
