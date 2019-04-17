@@ -9,17 +9,13 @@ def randomAddition():
 
 def randomSubstraction():
     a = random.randint(3,19)
-    b = 20 
-    while b >= a:
-        b = random.randint(1,5)
+    b = random.randint(1, min(5, a-1))
     return f'{a:d} — {b:d} ='
 
 def randomAdditionSubstraction():
     a = random.randint(2,10)
     b = random.randint(2,10)
-    c = 20 
-    while c >= a:
-        c = random.randint(1,5)
+    c = random.randint(1, min(5, a + b))
     return f'{a:d} + {b:d} — {c:d} ='
 
 examplesSwitcher = {
