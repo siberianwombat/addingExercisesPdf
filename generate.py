@@ -2,6 +2,7 @@ import random
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib import pagesizes
 
 def randomAddition():
     a = random.randint(1, 10)
@@ -71,8 +72,7 @@ examplesSwitcher = {
 table = []
 nRows = 14
 nCols = 2
-a4WidthPoints = 595
-a4HeightPoints = 842 
+(a4WidthPoints, a4HeightPoints) = pagesizes.A4
 
 for r in range(nRows):
     row = []
