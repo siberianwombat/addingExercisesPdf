@@ -4,6 +4,12 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib import pagesizes
 
+font = "Helvetica"
+fontSize = 20
+placeholderHeight = 30
+placeholderWidth = 40
+marginX = 10
+
 def randomAddition():
     a = random.randint(1, 10)
     b = random.randint(1, 10)
@@ -61,6 +67,21 @@ def placeholderSimple():
     }.get(random.randint(1,4))
     return exersise()
 
+def drawPlaceholders(canvas, x, y, str, placeHolderX, placeHolderY, font, fontSize):
+    from reportlab.pdfbase.pdfmetrics import stringWidth
+    placeholderChar = '▢'
+    substrings = str.split(placeholderChar)
+    needPlaceholder = 0 
+    curX = x
+    for substring in substrings:
+        if needPlaceholder: 
+            canvas.roundRect(curX, y - fontSize, placeHolderX, placeHolderY, 5, stroke=1, fill=0)
+            curX += placeHolderX
+        canvas.drawString(curX, y, substring)
+        indent = stringWidth(substring, font, fontSize)
+        curX += indent
+        needPlaceholder = 1    
+
 examplesSwitcher = {
     1: randomAddition,
     2: randomSubstraction,
@@ -85,22 +106,17 @@ for line in table:
     print ("", line)
 
 c = canvas.Canvas("samples.pdf", bottomup=0)
-# c.setFont('Helvetica', 20)
-pdfmetrics.registerFont(TTFont('Verdana', 'Verdana.ttf'))
-c.setFont("Verdana", 20)
-# pdfmetrics.registerFont(TTFont('Andale Mono', 'Andale Mono.ttf'))
-# c.setFont("Andale Mono", 20)
+c.setFont(font, fontSize)
+# pdfmetrics.registerFont(TTFont('Verdana', 'Verdana.ttf'))
+# c.setFont("Verdana", 20)
 
-# print ("", c.getAvailableFonts())
 stepY = int(a4HeightPoints / (nRows + 1))
 stepX = int(a4WidthPoints / nCols)
-marginX = 10
 cursorY = stepY
 for line in table:
     cursorX = 0
     for cell in line:
-        #c.drawString(cursorX + marginX, cursorY, u'▢'.encode('utf-8'))
-        c.drawString(cursorX + marginX, cursorY, cell)
+        drawPlaceholders(c, cursorX + marginX, cursorY, cell, placeholderWidth, placeholderHeight, font, fontSize)
         cursorX += stepX
     cursorY += stepY
 c.save()
