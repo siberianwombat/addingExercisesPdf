@@ -67,20 +67,55 @@ def placeholderSimple():
     }.get(random.randint(1,4))
     return exersise()
 
+def comparisonSimpleAddition():
+    a = random.randint(1, 10)
+    b = random.randint(1, 10)
+    if random.randint(0, 100) < 30: # 30% is 'equal' 
+        c = a + b
+    else:
+        c = random.randint(0, 20)
+    return f'{a:d} + {b:d} ▢ {c:d}'
+
+def comparisonSimpleSubstraction():
+    a = random.randint(3, 19)
+    b = random.randint(1, min(5, a-1))
+    if random.randint(0, 100) < 30: # 30% is 'equal' 
+        c = a - b
+    else:
+        c = random.randint(0, 20)
+    return f'{a:d} — {b:d} ▢ {c:d}'
+
+def comparisonSimpleOperations():
+    exersise = {
+        1: comparisonSimpleAddition,
+        2: comparisonSimpleSubstraction,
+    }.get(random.randint(1,2))
+    return exersise()
+    
+
 def drawPlaceholders(canvas, x, y, str, placeHolderX, placeHolderY, font, fontSize):
     from reportlab.pdfbase.pdfmetrics import stringWidth
+    from reportlab.lib.colors import lightgrey, gray, black
     placeholderChar = '▢'
     substrings = str.split(placeholderChar)
     needPlaceholder = 0 
     curX = x
     for substring in substrings:
         if needPlaceholder: 
-            canvas.roundRect(curX, y - fontSize, placeHolderX, placeHolderY, 5, stroke=1, fill=0)
+            canvas.setStrokeColor(lightgrey)
+            canvas.roundRect(
+                curX, y - fontSize, 
+                placeHolderX, placeHolderY, 
+                5, 
+                stroke=1, 
+                fill=0
+                )
+            canvas.setStrokeColor(black)
             curX += placeHolderX
         canvas.drawString(curX, y, substring)
         indent = stringWidth(substring, font, fontSize)
         curX += indent
-        needPlaceholder = 1    
+        needPlaceholder = 1
 
 examplesSwitcher = {
     1: randomAddition,
@@ -88,6 +123,7 @@ examplesSwitcher = {
     3: randomAdditionSubstraction,
     4: lessOrMore,
     5: placeholderSimple,
+    6: comparisonSimpleOperations,
 }
 
 table = []
@@ -98,7 +134,7 @@ nCols = 2
 for r in range(nRows):
     row = []
     for c in range(nCols):
-        sampleGenerator = examplesSwitcher.get(random.randint(5,5), lambda: "Invalid value")
+        sampleGenerator = examplesSwitcher.get(random.randint(6, 6), lambda: "Invalid value")
         row.append(sampleGenerator())
     table.append(row)
 
