@@ -12,9 +12,6 @@ leftMargin = 10
 nRows = 14
 nCols = 2
 
-(a4WidthPoints, a4HeightPoints) = pagesizes.A4
-table = []
-
 def randomAddition():
     a = random.randint(1, 10)
     b = random.randint(1, 10)
@@ -131,6 +128,7 @@ examplesSwitcher = {
     6: comparisonSimpleOperations,
 }
 
+table = []
 for r in range(nRows):
     row = []
     for c in range(nCols):
@@ -146,6 +144,7 @@ c.setFont(font, fontSize)
 # pdfmetrics.registerFont(TTFont('Verdana', 'Verdana.ttf'))
 # c.setFont("Verdana", 20)
 
+(a4WidthPoints, a4HeightPoints) = pagesizes.A4
 stepY = int(a4HeightPoints / (nRows + 1))
 stepX = int(a4WidthPoints / nCols)
 cursorY = stepY
