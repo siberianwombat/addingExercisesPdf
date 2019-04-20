@@ -1,3 +1,4 @@
+import argparse
 import random
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
@@ -11,6 +12,13 @@ placeholderWidth = 40
 leftMargin = 10
 nRows = 14
 nCols = 2
+
+parser = argparse.ArgumentParser(description='Generates 1st graders math excersises')
+parser.add_argument('--outfile', help='output to file, default: `sample.pdf`', default='sample.pdf')
+
+args = parser.parse_args()
+print (args.accumulate(args.integers))
+filename = args.outfile
 
 def randomAddition():
     a = random.randint(1, 10)
@@ -139,7 +147,7 @@ for r in range(nRows):
 for line in table:
     print ("", line)
 
-c = canvas.Canvas("samples.pdf", bottomup=0)
+c = canvas.Canvas(filename, bottomup=0)
 c.setFont(font, fontSize)
 # pdfmetrics.registerFont(TTFont('Verdana', 'Verdana.ttf'))
 # c.setFont("Verdana", 20)
