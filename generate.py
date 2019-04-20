@@ -8,7 +8,12 @@ font = "Helvetica"
 fontSize = 20
 placeholderHeight = 30
 placeholderWidth = 40
-marginX = 10
+leftMargin = 10
+nRows = 14
+nCols = 2
+
+(a4WidthPoints, a4HeightPoints) = pagesizes.A4
+table = []
 
 def randomAddition():
     a = random.randint(1, 10)
@@ -126,15 +131,10 @@ examplesSwitcher = {
     6: comparisonSimpleOperations,
 }
 
-table = []
-nRows = 14
-nCols = 2
-(a4WidthPoints, a4HeightPoints) = pagesizes.A4
-
 for r in range(nRows):
     row = []
     for c in range(nCols):
-        sampleGenerator = examplesSwitcher.get(random.randint(6, 6), lambda: "Invalid value")
+        sampleGenerator = examplesSwitcher.get(random.randint(5, 5), lambda: "Invalid value")
         row.append(sampleGenerator())
     table.append(row)
 
@@ -152,7 +152,11 @@ cursorY = stepY
 for line in table:
     cursorX = 0
     for cell in line:
-        drawPlaceholders(c, cursorX + marginX, cursorY, cell, placeholderWidth, placeholderHeight, font, fontSize)
+        drawPlaceholders(c, 
+            cursorX + leftMargin, cursorY, 
+            cell, 
+            placeholderWidth, placeholderHeight, 
+            font, fontSize)
         cursorX += stepX
     cursorY += stepY
 c.save()
