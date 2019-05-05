@@ -17,7 +17,6 @@ parser = argparse.ArgumentParser(description='Generates 1st graders math excersi
 parser.add_argument('--outfile', help='output to file, default: `sample.pdf`', default='sample.pdf')
 
 args = parser.parse_args()
-print (args.accumulate(args.integers))
 filename = args.outfile
 
 def randomAddition():
@@ -102,6 +101,24 @@ def comparisonSimpleOperations():
     }.get(random.randint(1,2))
     return exersise()
     
+def addingToDozens():
+    a = random.randint(1, 3) * 10
+    b = random.randint(1, 9)
+    return f'{a:d} + {b:d} = ▢'
+
+def addingLargeNumberToSmallNumber():
+    a = random.randint(1, 5)
+    b = random.randint(6, 19)
+    return f'{a:d} + {b:d} = ▢'
+
+def mixLargeNumber():     
+    exersise = {
+        1: addingToDozens,
+        2: addingLargeNumberToSmallNumber,
+        3: randomAddition,
+        4: randomSubstraction,
+    }.get(random.randint(1,4))
+    return exersise()
 
 def drawPlaceholders(canvas, x, y, str, placeHolderX, placeHolderY, font, fontSize):
     from reportlab.pdfbase.pdfmetrics import stringWidth
@@ -134,13 +151,16 @@ examplesSwitcher = {
     4: lessOrMore,
     5: placeholderSimple,
     6: comparisonSimpleOperations,
+    7: addingToDozens,
+    8: addingLargeNumberToSmallNumber,
+    9: mixLargeNumber,
 }
 
 table = []
 for r in range(nRows):
     row = []
     for c in range(nCols):
-        sampleGenerator = examplesSwitcher.get(random.randint(5, 5), lambda: "Invalid value")
+        sampleGenerator = examplesSwitcher.get(random.randint(9, 9), lambda: "Invalid value")
         row.append(sampleGenerator())
     table.append(row)
 
