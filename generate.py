@@ -125,6 +125,16 @@ def comparisonSimpleOperations():
         2: comparisonSimpleSubstraction,
     }.get(random.randint(1,2))
     return exersise()
+
+def addingToDozens():
+    a = random.randint(1, 3) * 10
+    b = random.randint(1, 9)
+    return f'{a:d} + {b:d} = ▢'
+
+def addingLargeNumberToSmallNumber():
+    a = random.randint(1, 5)
+    b = random.randint(6, 19)
+    return f'{a:d} + {b:d} = ▢'
     
 def drawPlaceholders(canvas, x, y, str, placeHolderX, placeHolderY, font, fontSize):
     from reportlab.pdfbase.pdfmetrics import stringWidth
