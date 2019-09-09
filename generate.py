@@ -17,24 +17,48 @@ parser = argparse.ArgumentParser(description='Generates 1st graders math excersi
 parser.add_argument('--outfile', help='output to file, default: `sample.pdf`', default='sample.pdf')
 
 args = parser.parse_args()
-print (args.accumulate(args.integers))
+# print (args.accumulate(args.integers))
 filename = args.outfile
 
 def randomAddition():
-    a = random.randint(1, 10)
+    a = random.randint(10, 40)
     b = random.randint(1, 10)
     return f'{a:d} + {b:d} = ▢'
 
 def randomSubstraction():
-    a = random.randint(3, 19)
+    a = random.randint(3, 40)
     b = random.randint(1, min(5, a-1))
     return f'{a:d} — {b:d} = ▢'
 
 def randomAdditionSubstraction():
-    a = random.randint(2, 10)
+    a = random.randint(2, 40)
     b = random.randint(2, 10)
     c = random.randint(1, min(5, a + b))
     return f'{a:d} + {b:d} — {c:d} = ▢'
+
+def randomAdditionAddition():
+    a = random.randint(2, 40)
+    b = random.randint(2, 10)
+    c = random.randint(1, min(5, a + b))
+    return f'{a:d} + {b:d} + {c:d} = ▢'
+
+def randomAdditionAdditionWithParentheses():
+    a = random.randint(2, 40)
+    b = random.randint(1, 5)
+    c = random.randint(1, 9 - b)
+    return f'{a:d} + ({b:d} + {c:d}) = ▢'
+
+def randomAdditionSubstractionWithParentheses():
+    a = random.randint(2, 40)
+    b = random.randint(2, 10)
+    c = random.randint(1, b - 1)
+    return f'{a:d} + ({b:d} — {c:d}) = ▢'
+
+def addingDozensAndDimes():
+    a = random.randint(1, 4) * 10
+    b = random.randint(1, 4) * 10
+    c = random.randint(1, 9)
+    return f'{a:d} + {b:d} + {c:d} = ▢'
 
 def lessOrMore():
     a = random.randint(0, 20)
@@ -102,7 +126,6 @@ def comparisonSimpleOperations():
     }.get(random.randint(1,2))
     return exersise()
     
-
 def drawPlaceholders(canvas, x, y, str, placeHolderX, placeHolderY, font, fontSize):
     from reportlab.pdfbase.pdfmetrics import stringWidth
     from reportlab.lib.colors import lightgrey, gray, black
@@ -131,16 +154,18 @@ examplesSwitcher = {
     1: randomAddition,
     2: randomSubstraction,
     3: randomAdditionSubstraction,
-    4: lessOrMore,
-    5: placeholderSimple,
-    6: comparisonSimpleOperations,
+    4: randomAdditionAddition,
+    5: randomAdditionSubstractionWithParentheses,
+    6: randomAdditionAdditionWithParentheses,
+    7: addingDozensAndDimes,
+    8: addingDozensAndDimes,
 }
 
 table = []
 for r in range(nRows):
     row = []
     for c in range(nCols):
-        sampleGenerator = examplesSwitcher.get(random.randint(5, 5), lambda: "Invalid value")
+        sampleGenerator = examplesSwitcher.get(random.randint(1, 8), lambda: "Invalid value")
         row.append(sampleGenerator())
     table.append(row)
 
